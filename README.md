@@ -4,4 +4,10 @@ This repo contains my solutions for this year's [Advent of Code](https://advento
 
 I've coded all of these in Rust, with each solution in their own folder (`day1`, `day2`, etc).
 
-**Don't run the solutions using `cargo`**. Also, you'll have to provide your own input files.
+## Usage
+```
+$ cargo build --release
+$ /path/to/advent_of_code <day> /path/to/your/input/file 
+```
+
+**Note:** `day` is a number

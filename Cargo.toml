@@ -4,6 +4,5 @@ version = "0.0.0"
 authors = ["Cheeseinator"]
 edition = "2018"
 
-# I only need this file so rust-analyzer doesn't crash
-
 [dependencies]
+regex = "1"

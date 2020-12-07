@@ -1,7 +1,6 @@
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use std::vec::Vec;
 
 fn calc(s: String, seats: u32, low: char) -> u32 {
     let mut arr: Vec<u32> = (0..seats).collect();
@@ -22,8 +21,7 @@ fn seat_id(seat: &String) -> u32 {
     rows + cols
 }
 
-fn main() {
-    let file = File::open("input").unwrap();
+pub fn answer(file: File) {
     let lines = BufReader::new(file).lines();
 
     let mut seat_map = HashMap::new();
@@ -37,7 +35,7 @@ fn main() {
         }
     }
 
-    println!("Part 1 answer: {}", max);
+    println!("part 1 answer: {}", max);
 
     for i in 0..max - 1 {
         if !seat_map.contains_key(&i)
@@ -46,7 +44,7 @@ fn main() {
         {
             // Fun fact: it took me 15 minutes to get this because I thought we were supposed to
             // print out the string instead of the ID
-            println!("Part 2 answer: {}", i);
+            println!("part 2 answer: {}", i);
         }
     }
 }

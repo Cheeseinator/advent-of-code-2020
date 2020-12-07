@@ -1,7 +1,6 @@
 use std::collections::HashSet;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use std::vec::Vec;
 
 fn check(set: &HashSet<String>, c: char) -> bool {
     for s in set {
@@ -12,8 +11,7 @@ fn check(set: &HashSet<String>, c: char) -> bool {
     true
 }
 
-fn main() {
-    let file = File::open("input").unwrap();
+pub fn answer(file: File) {
     let reader = BufReader::new(file);
     let mut lines: Vec<String> = Vec::new();
 
@@ -49,6 +47,6 @@ fn main() {
         }
     }
 
-    println!("Part 1 answer: {}", a1);
-    println!("Part 2 answer: {}", a2);
+    println!("part 1 answer: {}", a1);
+    println!("part 2 answer: {}", a2);
 }

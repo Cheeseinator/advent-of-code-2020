@@ -15,8 +15,7 @@ fn slope(vec: &Vec<Vec<bool>>, right: usize, down: usize) -> u32 {
     trees
 }
 
-fn main() {
-    let file = File::open("input").unwrap();
+pub fn answer(file: File) {
     let lines = BufReader::new(file).lines();
 
     let mut map: Vec<Vec<bool>> = Vec::new();
@@ -32,7 +31,7 @@ fn main() {
     }
 
     println!(
-        "Total: {}",
+        "total: {}",
         slope(&map, 1, 1)
             * slope(&map, 3, 1)
             * slope(&map, 5, 1)

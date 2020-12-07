@@ -1,6 +1,14 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use std::vec::Vec;
+
+fn has_fields(fields: &Vec<String>, required: &Vec<&str>) -> bool {
+    for r in required {
+        if !fields.contains(&r.to_string()) {
+            return false;
+        }
+    }
+    true
+}
 
 fn get_field(fields: &Vec<String>, name: &str) -> Option<String> {
     for f in fields {
@@ -15,7 +23,7 @@ fn get_field(fields: &Vec<String>, name: &str) -> Option<String> {
     None
 }
 
-fn validate(fields: &Vec<String>) -> bool {
+fn check_fields(fields: &Vec<String>) -> bool {
     match get_field(fields, "byr") {
         Some(s) => {
             let byr = s.parse::<u32>().unwrap();
@@ -106,8 +114,9 @@ fn validate(fields: &Vec<String>) -> bool {
     }
 }
 
-fn main() {
-    let file = File::open("input").unwrap();
+pub fn part_1(file: &File) {
+    let required = vec!["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"];
+
     let lines = BufReader::new(file).lines();
 
     let mut fields: Vec<String> = Vec::new();
@@ -117,7 +126,32 @@ fn main() {
         let line = _line.unwrap();
 
         if line == "" {
-            if validate(&fields) {
+            if has_fields(&fields, &required) {
+                answer += 1;
+            }
+            fields.clear();
+        } else {
+            for field in line.split(" ") {
+                let (name, _) = field.split_at(3);
+                fields.push(name.to_string());
+            }
+        }
+    }
+
+    println!("answer: {}", answer);
+}
+
+pub fn part_2(file: &File) {
+    let lines = BufReader::new(file).lines();
+
+    let mut fields: Vec<String> = Vec::new();
+    let mut answer = 0;
+
+    for _line in lines {
+        let line = _line.unwrap();
+
+        if line == "" {
+            if check_fields(&fields) {
                 answer += 1;
             }
             fields.clear();
@@ -128,5 +162,5 @@ fn main() {
         }
     }
 
-    println!("Answer: {}", answer);
+    println!("answer: {}", answer);
 }

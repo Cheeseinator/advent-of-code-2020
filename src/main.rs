@@ -5,6 +5,7 @@ mod day4;
 mod day5;
 mod day6;
 mod day7;
+mod day8;
 
 use std::fs::File;
 use std::io::{prelude::*, SeekFrom};
@@ -39,6 +40,7 @@ fn main() {
                 5 => day5::answer(f),
                 6 => day6::answer(f),
                 7 => day7::answer(f),
+                8 => day8::answer(f),
                 _ => {
                     println!("unknown day '{}'", i);
                     exit(1);

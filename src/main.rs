@@ -6,6 +6,7 @@ mod day5;
 mod day6;
 mod day7;
 mod day8;
+mod day9;
 
 use std::fs::File;
 use std::io::{prelude::*, SeekFrom};
@@ -17,13 +18,22 @@ fn reset(file: &mut File) {
 
 fn main() {
     let argv: Vec<String> = std::env::args().collect();
-    if argv.len() != 3 {
-        println!("usage: advent_of_code day /path/to/input");
+    if argv.len() < 2 || argv.len() > 3 {
+        println!("usage: advent_of_code day [input_file]");
         exit(1);
     }
 
+    let path: String;
+    if argv.len() == 3 {
+        // user provided path
+        path = argv[2].clone();
+    } else {
+        // user provided only day
+        path = format!("src/day{}/input", &argv[1]);
+    }
+
     match &argv[1].parse::<u8>() {
-        Ok(i) => match File::open(&argv[2]) {
+        Ok(i) => match File::open(&path) {
             Ok(mut f) => match i {
                 1 => day1::answer(f),
                 2 => {
@@ -41,13 +51,14 @@ fn main() {
                 6 => day6::answer(f),
                 7 => day7::answer(f),
                 8 => day8::answer(f),
+                9 => day9::answer(f),
                 _ => {
                     println!("unknown day '{}'", i);
                     exit(1);
                 }
             },
             _ => {
-                println!("cannot open file '{}'", argv[2]);
+                println!("cannot open file '{}'", &path);
                 exit(1);
             }
         },

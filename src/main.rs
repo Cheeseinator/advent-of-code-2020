@@ -5,6 +5,7 @@ mod day11;
 mod day12;
 mod day13;
 mod day14;
+mod day15;
 mod day2;
 mod day3;
 mod day4;
@@ -63,6 +64,7 @@ fn main() {
                 12 => day12::answer(f),
                 13 => day13::answer(f),
                 14 => day14::answer(f),
+                15 => day15::answer(f),
                 _ => {
                     println!("unknown day '{}'", i);
                     exit(1);

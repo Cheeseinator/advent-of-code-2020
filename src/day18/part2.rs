@@ -41,7 +41,7 @@ pub fn parse_add(a: &String) -> String {
 }
 
 // turn 3 * (4 + 2) into 3 * 6
-fn parse_paren(mut s: &String, deep: bool) -> String {
+fn parse_paren(s: &String, deep: bool) -> String {
     let mut arr = vec![String::new()];
 
     if !s.contains('(') {
